@@ -10,6 +10,8 @@ RUN go get github.com/tools/godep
 
 WORKDIR /go/src/github.com/kubernetes-up-and-running/kuard
 
+RUN git clone https://github.com/kubernetes-up-and-running/kuard .
+
 # Copy all sources in
 COPY . .
 
