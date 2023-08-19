@@ -6,6 +6,10 @@ spec:
   containers:
     - image: gcr.io/kuar-demo/kuard-amd64:blue
       name: kuard
+      ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
       livenessProbe:
         httpGet:
           path: /healthy
@@ -14,7 +18,12 @@ spec:
         timeoutSeconds: 1
         periodSeconds: 10
         failureThreshold: 3
-      ports:
-        - containerPort: 8080
-          name: http
-          protocol: TCP
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: 8080
+        initialDelaySeconds: 30
+        timeoutSeconds: 1
+        periodSeconds: 10
+        failureThreshold: 3
+      
