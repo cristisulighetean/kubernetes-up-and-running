@@ -5,4 +5,4 @@ This is a book review of "Kubernetes Up & Running" Second Edition written by Bre
 I am using the second release of the second edition which was released on 2019-10-04. All the examples shown in the book were tested and adapted for the current Kubernetes version.
 
 Not yet tested:
-- Ch10, ch11, ch12, ch13
+- Ch10, ch11, ch12, ch13, ch14, ch15, ch16, ch17, ch18
