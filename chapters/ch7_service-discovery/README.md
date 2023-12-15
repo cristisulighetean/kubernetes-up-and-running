@@ -24,7 +24,7 @@ kubectl expose deployment bandicot-prod
 kubectl get services -o wide
 ```
 
-Furthermore, that service is assigned a new type of virtual IP called a cluster IP. This is a special IP address the system will load-balance across all of the Pods that are iden‐ tified by the selector.
+Furthermore, that service is assigned a new type of virtual IP called a `cluster IP`. This is a special IP address the system will load-balance across all of the Pods that are identified by the selector.
 
 To interact with services, we are going to port forward to one of the alpaca Pods. Start and leave this command running in a terminal window.
 
@@ -43,6 +43,10 @@ The full DNS name here is `alpaca-prod.default.svc.cluster.local..` Let’s brea
 - `default`: The namespace that this service is in.
 - `svc`: Recognizing that this is a service. This allows Kubernetes to expose other types of things as DNS in the future.
 - `cluster.local.` - The base domain name for the cluster. This is the default and what you will see for most clusters. Administrators may change this to allow unique DNS names across multiple clusters.
+
+When referring to a service in your own namespace you can just use the service name (alpaca-prod). You can also refer to a service in another namespace with `alpaca-
+prod.default`. And, of course, you can use the fully qualified service name (alpaca-prod.default.svc.cluster.local.). Try each of these out in the “DNS Query”
+section of kuard.
 
 ## Readiness check
 
@@ -76,8 +80,7 @@ spec: ...
 
 This sets up the Pods this deployment will create so that they will be checked for readiness via an `HTTP GET to /ready` on port 8080. This check is done every 2 seconds starting as soon as the Pod comes up. If three successive checks fail, then the Pod will be considered not ready. However, if only one check succeeds, the Pod will again be considered ready.
 
-Only ready Pods are sent traffic.
-Updating the deployment definition like this will delete and recreate the alpaca Pods.
+Only ready Pods are sent traffic. Updating the deployment definition like this will delete and recreate the alpaca Pods.
 
 As such, we need to restart our port-forward command from earlier
 
